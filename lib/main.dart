@@ -12,7 +12,7 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      title: "Chat Uygulaması Arayüzü",
+      title: "Chat Uygulamasi Arayüzü",
       home: Iskele(),
     );
   }
@@ -24,7 +24,7 @@ class Iskele extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat Uygulaması"),
+        title: Text("Chat Uygulamasi"),
       ),
       body: AnaEkran(),
     );
@@ -39,14 +39,14 @@ class AnaEkran extends StatefulWidget {
 }
 
 class _AnaEkranState extends State<AnaEkran> {
-  final _t1 = TextEditingController();
+  final t1 = TextEditingController();
 
   List<MesajBalonu> mesajListesi = [];
   listeyeEkle(String gelenMesaj) {
     setState(() {
       MesajBalonu mesajNesnesi = MesajBalonu(mesaj: gelenMesaj);
       mesajListesi.insert(0, mesajNesnesi);
-      _t1.clear();
+      t1.clear();
     });
   }
 
@@ -55,9 +55,11 @@ class _AnaEkranState extends State<AnaEkran> {
       margin: EdgeInsets.all(15),
       child: Row(
         children: [
-          const Flexible(child: TextField(),),
+          Flexible(
+            child: TextField(controller: t1),
+          ),
           IconButton(
-              onPressed: () => listeyeEkle(_t1.text), icon: Icon(Icons.send)),
+              onPressed: () => listeyeEkle(t1.text), icon: Icon(Icons.send)),
         ],
       ),
     );
@@ -83,10 +85,11 @@ class _AnaEkranState extends State<AnaEkran> {
       ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('_t1', _t1));
+    properties.add(DiagnosticsProperty<TextEditingController>('t1', t1));
   }
 }
 
